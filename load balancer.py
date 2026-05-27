@@ -44,6 +44,39 @@ class AVL_Router_Tree:
         self.recalcular_altura(filho)
         return filho
 
+    def inserir(self, node, valor):
+        if not node:
+            return node(valor)
+
+        if valor < node.valor:
+            node.filho_esquerdo = self.inserir(node.filho_esquerdo, valor)
+        else:
+            node.filho_direito = self.inserir(node.filho_direito, valor)
+
+        self.recalcular_altura(node)
+
+        fator_balanceamento = self.balanceamento(node)
+
+        #Esquerda-Esquerda
+        if fator_balanceamento > 1 and valor < node.filho_esquerdo.valor:
+            return self.rotacionar_direita(node)
+
+        #Direita-Direita
+        if fator_balanceamento < -1 and valor > node.filho_direito.valor:
+            return self.rotacionar_esquerda(node)
+
+        #Esquerda-Direita
+        if fator_balanceamento > 1 and valor > node.filho_esquerdo.valor:
+            node.filho_esquerdo = self.rotacionar_esquerda(node.filho_esquerdo)
+            return self.rotacionar_direita(node)
+
+        #Direita-Esquerda
+        if fator_balanceamento < -1 and valor < node.filho_direito.valor:
+            node.filho_direito = self.rotacionar_direita(node.filho_direito)
+            return self.rotacionar_esquerda(node)
+
+        return node
+
 class nodeRN:
     def __init__(self, valor):
         self.valor = valor
