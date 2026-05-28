@@ -79,6 +79,7 @@ class AVL_Router_Tree:
 
     def menor_valor(self, node):
         node_atual = node
+
         while node_atual.filho_esquerdo is not None:
             node_atual = node_atual.filho_esquerdo
         return node_atual
@@ -107,7 +108,7 @@ class AVL_Router_Tree:
         if raiz is None:
             return raiz
 
-        raiz.altura = self.recalcular_altura(raiz)
+        self.recalcular_altura(raiz)
         fator_balanceamento = self.balanceamento(raiz)
 
         #Esquerda-Esquerda
@@ -129,6 +130,7 @@ class AVL_Router_Tree:
             return self.rotacionar_esquerda(raiz)
 
         return raiz
+
 
 class RedBlack_Router_Tree:
     def __init__(self):
@@ -175,3 +177,76 @@ class RedBlack_Router_Tree:
         node_x.filho_direito = node_y
         node_y.pai = node_x
 
+    def corrigir_inserir(self, k:Node):
+        while k.pai.cor == "VERMELHO":
+
+            if k.pai == k.pai.pai.filho_direito:
+                tio = k.pai.pai.filho_esquerdo
+
+                if tio.cor == "VERMELHO":
+                    tio.cor = "PRETO"
+                    k.pai.cor = "PRETO"
+                    k.pai.pai.cor = "VERMELHO"
+                    k = k.pai.pai
+                else:
+                    if k == k.pai.filho_esquerdo:
+                        k = k.pai
+                        self.rotacionar_direita(k)
+
+                    k.pai.cor = "PRETO"
+                    k.pai.pai.cor = "VERMELHO"
+                    self.rotacionar_esquerda(k.pai.pai)
+
+            else:
+                tio = k.pai.pai.filho_direito
+
+                if tio.cor == "VERMELHO":
+                    tio.cor = "PRETO"
+                    k.pai.cor = "PRETO"
+                    k.pai.pai.cor = "VERMELHO"
+                    k = k.pai.pai
+                else:
+                    if k == k.pai.filho_direito:
+                        k = k.pai
+                        self.rotacionar_esquerda(k)
+
+                    k.pai.cor = "PRETO"
+                    k.pai.pai.cor = "VERMELHO"
+                    self.rotacionar_direita(k.pai.pai)
+
+            if k == self.raiz:
+                break
+
+        self.raiz.cor = "PRETO"
+
+    def inserir(self, valor):
+        novo_node = Node(valor)
+        novo_node.filho_esquerdo = self.NIL
+        novo_node.filho_direito = self.NIL
+        pai = None
+        atual = self.raiz
+
+        while atual != self.NIL:
+            pai = atual.filho_esquerdo
+            if novo_node.valor < atual.valor:
+                atual = atual.filho_esquerdo
+            else:
+                atual = atual.filho_direito
+
+        novo_node.pai = pai
+
+        if pai is None:
+            self.raiz = novo_node
+        elif novo_node.valor < pai.valor:
+            pai.filho_esquerdo = novo_node
+        else:
+            pai.filho_direito = novo_node
+
+        if novo_node.pai is None:
+            novo_node.cor = "PRETO"
+            return
+
+        if novo_node.pai.pai is None:
+            return
+
+        self.corrigir_inserir(novo_node)
