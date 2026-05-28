@@ -1,11 +1,32 @@
+class Packet_Rule:
+    def __init__(self, id, ip_origem, ip_destino, prioridade):
+        self.id = id
+        self.ip_origem = ip_origem
+        self.ip_destino = ip_destino
+        self.prioridade = prioridade
+
+    def __lt__(self, other):
+        return self.prioridade < other.prioridade
+
+    def __gt__(self, other):
+        return self.prioridade > other.prioridade
+
+    def __eq__(self, other):
+        return self.prioridade == other.prioridade
+
+    def __str__(self):
+        return f"[ID={self.id}, Prioridade={self.prioridade}]"
+
+
 class Node:
-    def __init__(self, valor, cor="VERMELHO"):
-        self.valor = valor
+    def __init__(self, regra, cor="VERMELHO"):
+        self.regra = regra
         self.filho_esquerdo = None
         self.filho_direito = None
         self.pai = None
         self.altura = 1
         self.cor = cor
+
 
 class AVL_Router_Tree:
     def __init__(self):
@@ -44,53 +65,53 @@ class AVL_Router_Tree:
         self.recalcular_altura(node_y)
         return node_y
 
-    def inserir(self, node, valor):
+    def inserir(self, node, regra):
         if not node:
-            return node(valor)
+            return node(regra)
 
-        if valor < node.valor:
-            node.filho_esquerdo = self.inserir(node.filho_esquerdo, valor)
+        if regra < node.regra:
+            node.filho_esquerdo = self.inserir(node.filho_esquerdo, regra)
         else:
-            node.filho_direito = self.inserir(node.filho_direito, valor)
+            node.filho_direito = self.inserir(node.filho_direito, regra)
 
         self.recalcular_altura(node)
 
         fator_balanceamento = self.balanceamento(node)
 
         #Esquerda-Esquerda
-        if fator_balanceamento > 1 and valor < node.filho_esquerdo.valor:
+        if fator_balanceamento > 1 and regra < node.filho_esquerdo.regra:
             return self.rotacionar_direita(node)
 
         #Direita-Direita
-        if fator_balanceamento < -1 and valor > node.filho_direito.valor:
+        if fator_balanceamento < -1 and regra > node.filho_direito.regra:
             return self.rotacionar_esquerda(node)
 
         #Esquerda-Direita
-        if fator_balanceamento > 1 and valor > node.filho_esquerdo.valor:
+        if fator_balanceamento > 1 and regra > node.filho_esquerdo.regra:
             node.filho_esquerdo = self.rotacionar_esquerda(node.filho_esquerdo)
             return self.rotacionar_direita(node)
 
         #Direita-Esquerda
-        if fator_balanceamento < -1 and valor < node.filho_direito.valor:
+        if fator_balanceamento < -1 and regra < node.filho_direito.regra:
             node.filho_direito = self.rotacionar_direita(node.filho_direito)
             return self.rotacionar_esquerda(node)
 
         return node
 
-    def menor_valor(self, node):
+    def menor_regra(self, node):
         node_atual = node
 
         while node_atual.filho_esquerdo is not None:
             node_atual = node_atual.filho_esquerdo
         return node_atual
 
-    def remover(self, raiz, valor):
+    def remover(self, raiz, regra):
         if not raiz:
             return raiz
-        elif valor < raiz.valor:
-            raiz.filho_esquerdo = self.remover(raiz.filho_esquerdo, valor)
-        elif valor > raiz.valor:
-            raiz.filho_direito = self.remover(raiz.filho_direito, valor)
+        elif regra < raiz.regra:
+            raiz.filho_esquerdo = self.remover(raiz.filho_esquerdo, regra)
+        elif regra > raiz.regra:
+            raiz.filho_direito = self.remover(raiz.filho_direito, regra)
         else:
             if raiz.filho_esquerdo is None:
                 temp = raiz.filho_direito
@@ -101,9 +122,9 @@ class AVL_Router_Tree:
                 raiz = None
                 return temp
 
-            temp = self.menor_valor(raiz.filho_direito)
-            raiz.valor = temp.valor
-            raiz.filho_direito = self.remover(raiz.filho_direito, temp.valor)
+            temp = self.menor_regra(raiz.filho_direito)
+            raiz.regra = temp.regra
+            raiz.filho_direito = self.remover(raiz.filho_direito, temp.regra)
 
         if raiz is None:
             return raiz
@@ -112,20 +133,20 @@ class AVL_Router_Tree:
         fator_balanceamento = self.balanceamento(raiz)
 
         #Esquerda-Esquerda
-        if fator_balanceamento > 1 and raiz.valor < raiz.filho_esquerdo.valor:
+        if fator_balanceamento > 1 and raiz.regra < raiz.filho_esquerdo.regra:
             return self.rotacionar_direita(raiz)
 
         #Direita-Direita
-        if fator_balanceamento < -1 and valor > raiz.filho_direito.valor:
+        if fator_balanceamento < -1 and regra > raiz.filho_direito.regra:
             return self.rotacionar_esquerda(raiz)
 
         #Esquerda-Direita
-        if fator_balanceamento > 1 and valor > raiz.filho_esquerdo.valor:
+        if fator_balanceamento > 1 and regra > raiz.filho_esquerdo.regra:
             raiz.filho_esquerdo = self.rotacionar_esquerda(raiz.filho_esquerdo)
             return self.rotacionar_direita(raiz)
 
         #Direita-Esquerda
-        if fator_balanceamento < -1 and valor < raiz.filho_direito.valor:
+        if fator_balanceamento < -1 and regra < raiz.filho_direito.regra:
             raiz.filho_direito = self.rotacionar_direita(raiz.filho_direito)
             return self.rotacionar_esquerda(raiz)
 
@@ -219,8 +240,8 @@ class RedBlack_Router_Tree:
 
         self.raiz.cor = "PRETO"
 
-    def inserir(self, valor):
-        novo_node = Node(valor)
+    def inserir(self, regra):
+        novo_node = Node(regra)
         novo_node.filho_esquerdo = self.NIL
         novo_node.filho_direito = self.NIL
         pai = None
@@ -228,7 +249,7 @@ class RedBlack_Router_Tree:
 
         while atual != self.NIL:
             pai = atual.filho_esquerdo
-            if novo_node.valor < atual.valor:
+            if novo_node.regra < atual.regra:
                 atual = atual.filho_esquerdo
             else:
                 atual = atual.filho_direito
@@ -237,7 +258,7 @@ class RedBlack_Router_Tree:
 
         if pai is None:
             self.raiz = novo_node
-        elif novo_node.valor < pai.valor:
+        elif novo_node.regra < pai.regra:
             pai.filho_esquerdo = novo_node
         else:
             pai.filho_direito = novo_node
@@ -260,19 +281,19 @@ class RedBlack_Router_Tree:
             u.pai.filho_direito = v
         v.pai = u.pai
 
-    def menor_valor(self, node):
+    def menor_regra(self, node):
         while node.filho_esquerdo != self.NIL:
             node = node.filho_esquerdo
         return node
 
-    def buscar(self, node, valor):
-        if node == self.NIL or valor == node.valor:
+    def buscar(self, node, regra):
+        if node == self.NIL or regra == node.regra:
             return node
 
-        if valor < node.valor:
-            return self.buscar(node.filho_esquerdo, valor)
+        if regra < node.regra:
+            return self.buscar(node.filho_esquerdo, regra)
 
-        return self.buscar(node.filho_direito, valor)
+        return self.buscar(node.filho_direito, regra)
 
     def corrigir_remover(self, x:Node):
         while x != self.raiz and x.cor == "PRETO":
@@ -329,8 +350,8 @@ class RedBlack_Router_Tree:
 
         x.cor = "PRETO"
 
-    def remover(self, valor):
-        node_z = self.buscar(self.raiz, valor)
+    def remover(self, regra):
+        node_z = self.buscar(self.raiz, regra)
 
         if node_z == self.NIL:
             return
@@ -347,7 +368,7 @@ class RedBlack_Router_Tree:
             self.transplantar(node_z, node_z.filho_esquerdo)
 
         else:
-            node_y = self.menor_valor(node_z.filho_direito)
+            node_y = self.menor_regra(node_z.filho_direito)
             node_y_cor_original = node_y.cor
             node_x = node_y.filho_direito
 
