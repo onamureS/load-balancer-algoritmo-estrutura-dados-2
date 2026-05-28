@@ -250,3 +250,119 @@ class RedBlack_Router_Tree:
             return
 
         self.corrigir_inserir(novo_node)
+
+    def transplantar(self, u:Node, v:Node):
+        if u.pai is None:
+            self.raiz = v
+        elif u == u.pai.filho_esquerdo:
+            u.pai.filho_esquerdo = v
+        else:
+            u.pai.filho_direito = v
+        v.pai = u.pai
+
+    def menor_valor(self, node):
+        while node.filho_esquerdo != self.NIL:
+            node = node.filho_esquerdo
+        return node
+
+    def buscar(self, node, valor):
+        if node == self.NIL or valor == node.valor:
+            return node
+
+        if valor < node.valor:
+            return self.buscar(node.filho_esquerdo, valor)
+
+        return self.buscar(node.filho_direito, valor)
+
+    def corrigir_remover(self, x:Node):
+        while x != self.raiz and x.cor == "PRETO":
+            if x == x.pai.filho_esquerdo:
+                w = x.pai.filho_direito
+
+                if w.cor == "VERMELHO":
+                    w.cor = "PRETO"
+                    x.pai.cor = "VERMELHO"
+                    self.rotacionar_esquerda(x.pai)
+                    w = x.pai.filho_direito
+
+                if w.filho_esquerdo.cor == "PRETO" and w.filho_direito.cor == "PRETO":
+                    w.cor = "VERMELHO"
+                    x = x.pai
+
+                else:
+                    if w.filho_direito.cor == "PRETO":
+                        w.filho_esquerdo.cor = "PRETO"
+                        w.cor = "VERMELHO"
+                        self.rotacionar_direita(w)
+                        w = x.pai.filho_direito
+
+                    w.cor = x.pai.cor
+                    x.pai.cor = "PRETO"
+                    w.filho_direito.cor = "PRETO"
+                    self.rotacionar_esquerda(x.pai)
+                    x = self.raiz
+
+            else:
+                w = x.pai.filho_esquerdo
+                if w.cor == "VERMELHO":
+                    w.cor = "PRETO"
+                    x.pai.cor = "VERMELHO"
+                    self.rotacionar_direita(x.pai)
+                    w = x.pai.filho_esquerdo
+
+                if w.filho_direito.cor == "PRETO" and w.filho_esquerdo.cor == "PRETO":
+                    w.cor = "VERMELHO"
+                    x = x.pai
+
+                else:
+                    if w.filho_esquerdo.cor == "PRETO":
+                        w.filho_direito.cor = "PRETO"
+                        w.cor = "VERMELHO"
+                        self.rotacionar_esquerda(w)
+                        w = x.pai.filho_esquerdo
+
+                    w.cor = x.pai.cor
+                    x.pai.cor = "PRETO"
+                    w.filho_esquerdo.cor = "PRETO"
+                    self.rotacionar_direita(x.pai)
+                    x = self.raiz
+
+        x.cor = "PRETO"
+
+    def remover(self, valor):
+        node_z = self.buscar(self.raiz, valor)
+
+        if node_z == self.NIL:
+            return
+
+        node_y = node_z
+        node_y_cor_original = node_y.cor
+
+        if node_z.filho_esquerdo == self.NIL:
+            node_x = node_z.filho_direito
+            self.transplantar(node_z, node_z.filho_direito)
+
+        elif node_z.filho_direito == self.NIL:
+            node_x = node_z.filho_esquerdo
+            self.transplantar(node_z, node_z.filho_esquerdo)
+
+        else:
+            node_y = self.menor_valor(node_z.filho_direito)
+            node_y_cor_original = node_y.cor
+            node_x = node_y.filho_direito
+
+            if node_y.pai == node_z:
+                node_x.pai = node_y
+            else:
+                self.transplantar(node_y, node_y.filho_direito)
+                node_y.filho_direito = node_z.filho_direito
+                node_y.filho_direito.pai = node_y
+
+            self.transplantar(node_z, node_y)
+
+            node_y.filho_esquerdo = node_z.filho_esquerdo
+            node_y.filho_esquerdo.pai = node_y
+            node_y.cor = node_z.cor
+
+        if node_y_cor_original == "PRETO":
+            self.corrigir_remover(node_x)
