@@ -1,9 +1,11 @@
-class NodeAVL:
-    def __init__(self, valor):
+class Node:
+    def __init__(self, valor, cor="Vermelho"):
         self.valor = valor
         self.filho_esquerdo = None
         self.filho_direito = None
+        self.pai = None
         self.altura = 1
+        self.cor = cor
 
 class AVL_Router_Tree:
     def __init__(self):
@@ -28,10 +30,8 @@ class AVL_Router_Tree:
         #==============================#
         filho.filho_direito = node_inicial
         node_inicial.filho_esquerdo = subtree_t2
-        #node_inicial.altura = 1 + max(self.get_altura(node_inicial.filho_esquerdo), self.get_altura(node_inicial.filho_direito))
         self.recalcular_altura(node_inicial)
         self.recalcular_altura(filho)
-        #filho.altura = 1 + max(self.get_altura(filho.filho_esquerdo), self.get_altura(filho.filho_direito))
         return filho
 
     def rotacionar_esquerda(self, node_inicial):
@@ -77,10 +77,55 @@ class AVL_Router_Tree:
 
         return node
 
-class nodeRN:
-    def __init__(self, valor):
-        self.valor = valor
-        self.cor = "Vermelho"
-        self.esquerda = None
-        self.direita = None
-        self.pai = None
+    def menor_valor(self, node):
+        node_atual = node
+        while node_atual.filho_esquerdo is not None:
+            node_atual = node_atual.filho_esquerdo
+        return node_atual
+
+    def remover(self, raiz, valor):
+        if not raiz:
+            return raiz
+        elif valor < raiz.valor:
+            raiz.filho_esquerdo = self.remover(raiz.filho_esquerdo, valor)
+        elif valor > raiz.valor:
+            raiz.filho_direito = self.remover(raiz.filho_direito, valor)
+        else:
+            if raiz.filho_esquerdo is None:
+                temp = raiz.filho_direito
+                raiz = None
+                return temp
+            elif raiz.filho_direito is None:
+                temp = raiz.filho_esquerdo
+                raiz = None
+                return temp
+
+            temp = self.menor_valor(raiz.filho_direito)
+            raiz.valor = temp.valor
+            raiz.filho_direito = self.remover(raiz.filho_direito, temp.valor)
+
+        if raiz is None:
+            return raiz
+
+        raiz.altura = self.recalcular_altura(raiz)
+        fator_balanceamento = self.balanceamento(raiz)
+
+        #Esquerda-Esquerda
+        if fator_balanceamento > 1 and raiz.valor < raiz.filho_esquerdo.valor:
+            return self.rotacionar_direita(raiz)
+
+        #Direita-Direita
+        if fator_balanceamento < -1 and valor > raiz.filho_direito.valor:
+            return self.rotacionar_esquerda(raiz)
+
+        #Esquerda-Direita
+        if fator_balanceamento > 1 and valor > raiz.filho_esquerdo.valor:
+            raiz.filho_esquerdo = self.rotacionar_esquerda(raiz.filho_esquerdo)
+            return self.rotacionar_direita(raiz)
+
+        #Direita-Esquerda
+        if fator_balanceamento < -1 and valor < raiz.filho_direito.valor:
+            raiz.filho_direito = self.rotacionar_direita(raiz.filho_direito)
+            return self.rotacionar_esquerda(raiz)
+
+        return raiz
