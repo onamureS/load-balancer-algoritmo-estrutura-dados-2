@@ -67,7 +67,7 @@ class AVL_Router_Tree:
 
     def inserir(self, node, regra):
         if not node:
-            return node(regra)
+            return Node(regra)
 
         if regra < node.regra:
             node.filho_esquerdo = self.inserir(node.filho_esquerdo, regra)
@@ -133,24 +133,34 @@ class AVL_Router_Tree:
         fator_balanceamento = self.balanceamento(raiz)
 
         #Esquerda-Esquerda
-        if fator_balanceamento > 1 and raiz.regra < raiz.filho_esquerdo.regra:
+        if fator_balanceamento > 1 and self.balanceamento(raiz.filho_esquerdo) >= 0:
             return self.rotacionar_direita(raiz)
 
         #Direita-Direita
-        if fator_balanceamento < -1 and regra > raiz.filho_direito.regra:
+        if fator_balanceamento < -1 and self.balanceamento(raiz.filho_direito) <= 0:
             return self.rotacionar_esquerda(raiz)
 
         #Esquerda-Direita
-        if fator_balanceamento > 1 and regra > raiz.filho_esquerdo.regra:
+        if fator_balanceamento > 1 and self.balanceamento(raiz.filho_esquerdo) < 0:
             raiz.filho_esquerdo = self.rotacionar_esquerda(raiz.filho_esquerdo)
             return self.rotacionar_direita(raiz)
 
         #Direita-Esquerda
-        if fator_balanceamento < -1 and regra < raiz.filho_direito.regra:
+        if fator_balanceamento < -1 and self.balanceamento(raiz.filho_direito) > 0:
             raiz.filho_direito = self.rotacionar_direita(raiz.filho_direito)
             return self.rotacionar_esquerda(raiz)
 
         return raiz
+
+    def buscar_por_prioridade(self, node, prioridade):
+        while node and node is not None:
+            if prioridade == node.regra:
+                return node
+            elif prioridade < node.regra:
+                node = node.filho_esquerdo
+            else:
+                node = node.filho_direito
+        return None
 
 
 class RedBlack_Router_Tree:
@@ -248,7 +258,7 @@ class RedBlack_Router_Tree:
         atual = self.raiz
 
         while atual != self.NIL:
-            pai = atual.filho_esquerdo
+            pai = atual
             if novo_node.regra < atual.regra:
                 atual = atual.filho_esquerdo
             else:
@@ -387,3 +397,13 @@ class RedBlack_Router_Tree:
 
         if node_y_cor_original == "PRETO":
             self.corrigir_remover(node_x)
+
+    def buscar_por_prioridade(self, node, prioridade):
+        while node and node != self.NIL:
+            if prioridade == node.regra:
+                return node
+            elif prioridade < node.regra:
+                node = node.filho_esquerdo
+            else:
+                node = node.filho_direito
+        return None
