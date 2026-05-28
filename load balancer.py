@@ -12,7 +12,7 @@ class Packet_Rule:
         return self.prioridade > other.prioridade
 
     def __eq__(self, other):
-        return self.prioridade == other.prioridade
+        return (self.prioridade == other.prioridade) and (self.id == other.id)
 
     def __str__(self):
         return f"[ID={self.id}, Prioridade={self.prioridade}]"
@@ -48,21 +48,35 @@ class AVL_Router_Tree:
     def rotacionar_direita(self, node_y):
         node_x = node_y.filho_esquerdo
         subtree_t2 = node_x.filho_direito
-        #==============================#
+
         node_x.filho_direito = node_y
         node_y.filho_esquerdo = subtree_t2
+        node_x.pai = node_y.pai
+        node_y.pai = node_x
+
+        if subtree_t2 is not None:
+            subtree_t2.pai = node_y
+
         self.recalcular_altura(node_y)
         self.recalcular_altura(node_x)
+
         return node_x
 
     def rotacionar_esquerda(self, node_x):
         node_y = node_x.filho_direito
         subtree_t2 = node_y.filho_esquerdo
-        #===============================#
+
         node_y.filho_esquerdo = node_x
         node_x.filho_direito = subtree_t2
+        node_y.pai = node_x.pai
+        node_x.pai = node_y
+
+        if subtree_t2 is not None:
+            subtree_t2.pai = node_x
+
         self.recalcular_altura(node_x)
         self.recalcular_altura(node_y)
+
         return node_y
 
     def inserir(self, node, regra):
@@ -71,8 +85,10 @@ class AVL_Router_Tree:
 
         if regra < node.regra:
             node.filho_esquerdo = self.inserir(node.filho_esquerdo, regra)
+            node.filho_esquerdo.pai = node
         else:
             node.filho_direito = self.inserir(node.filho_direito, regra)
+            node.filho_direito.pai = node
 
         self.recalcular_altura(node)
 
@@ -154,9 +170,9 @@ class AVL_Router_Tree:
 
     def buscar_por_prioridade(self, node, prioridade):
         while node and node is not None:
-            if prioridade == node.regra:
+            if prioridade == node.regra.prioridade:
                 return node
-            elif prioridade < node.regra:
+            elif prioridade < node.regra.prioridade:
                 node = node.filho_esquerdo
             else:
                 node = node.filho_direito
@@ -165,10 +181,10 @@ class AVL_Router_Tree:
 
 class RedBlack_Router_Tree:
     def __init__(self):
-        self.NIL = Node(0)
+        self.NIL = Node(None)
         self.NIL.cor = "PRETO"
-        self.NIL.filho_esquerdo = None
-        self.NIL.filho_direito = None
+        self.NIL.filho_esquerdo = self.NIL
+        self.NIL.filho_direito = self.NIL
         self.raiz = self.NIL
 
     def rotacionar_esquerda(self, node_x):
@@ -400,9 +416,9 @@ class RedBlack_Router_Tree:
 
     def buscar_por_prioridade(self, node, prioridade):
         while node and node != self.NIL:
-            if prioridade == node.regra:
+            if prioridade == node.regra.prioridade:
                 return node
-            elif prioridade < node.regra:
+            elif prioridade < node.regra.prioridade:
                 node = node.filho_esquerdo
             else:
                 node = node.filho_direito

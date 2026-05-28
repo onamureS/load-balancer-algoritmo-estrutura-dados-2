@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="adição da classe 'Packet_Rule' e início da refatoração das variáveis para acomodar a nova classe">
+    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="adição dos métodos 'buscar_por_prioridade' em ambas as árvores e correções nós códigos de inserção">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/load balancer.py" beforeDir="false" afterPath="$PROJECT_DIR$/load balancer.py" afterDir="false" />
     </list>
@@ -135,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779948403903</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="adição dos métodos 'buscar_por_prioridade' em ambas as árvores e correções nós códigos de inserção">
+      <option name="closed" value="true" />
+      <created>1779949784460</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1779949784460</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -170,6 +178,7 @@
     <MESSAGE value="adição do método de inserção da classe RedBlack_Router_Tree" />
     <MESSAGE value="adição do método de remoção da classe RedBlack_Router_Tree e métodos auxiliares" />
     <MESSAGE value="adição da classe 'Packet_Rule' e início da refatoração das variáveis para acomodar a nova classe" />
-    <option name="LAST_COMMIT_MESSAGE" value="adição da classe 'Packet_Rule' e início da refatoração das variáveis para acomodar a nova classe" />
+    <MESSAGE value="adição dos métodos 'buscar_por_prioridade' em ambas as árvores e correções nós códigos de inserção" />
+    <option name="LAST_COMMIT_MESSAGE" value="adição dos métodos 'buscar_por_prioridade' em ambas as árvores e correções nós códigos de inserção" />
   </component>
 </project>
