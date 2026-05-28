@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="adição do método de inserção da classe 'AVL_Router_Tree'">
+    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="adição do método de remoção da classe 'AVL_Router_Tree' e reformulação da classe 'Node'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/load balancer.py" beforeDir="false" afterPath="$PROJECT_DIR$/load balancer.py" afterDir="false" />
     </list>
@@ -95,7 +95,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779848514210</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adição do método de remoção da classe 'AVL_Router_Tree' e reformulação da classe 'Node'">
+      <option name="closed" value="true" />
+      <created>1779935494102</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1779935494102</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -125,6 +133,7 @@
     <MESSAGE value="commit inicial" />
     <MESSAGE value="adição de métodos da classe 'AVL_Router_Tree'" />
     <MESSAGE value="adição do método de inserção da classe 'AVL_Router_Tree'" />
-    <option name="LAST_COMMIT_MESSAGE" value="adição do método de inserção da classe 'AVL_Router_Tree'" />
+    <MESSAGE value="adição do método de remoção da classe 'AVL_Router_Tree' e reformulação da classe 'Node'" />
+    <option name="LAST_COMMIT_MESSAGE" value="adição do método de remoção da classe 'AVL_Router_Tree' e reformulação da classe 'Node'" />
   </component>
 </project>

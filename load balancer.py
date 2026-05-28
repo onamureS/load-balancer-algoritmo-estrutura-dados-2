@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, valor, cor="Vermelho"):
+    def __init__(self, valor, cor="VERMELHO"):
         self.valor = valor
         self.filho_esquerdo = None
         self.filho_direito = None
@@ -24,25 +24,25 @@ class AVL_Router_Tree:
             return 0
         return self.get_altura(node.filho_esquerdo) - self.get_altura(node.filho_direito)
 
-    def rotacionar_direita(self, node_inicial):
-        filho = node_inicial.filho_esquerdo
-        subtree_t2 = filho.filho_direito
+    def rotacionar_direita(self, node_y):
+        node_x = node_y.filho_esquerdo
+        subtree_t2 = node_x.filho_direito
         #==============================#
-        filho.filho_direito = node_inicial
-        node_inicial.filho_esquerdo = subtree_t2
-        self.recalcular_altura(node_inicial)
-        self.recalcular_altura(filho)
-        return filho
+        node_x.filho_direito = node_y
+        node_y.filho_esquerdo = subtree_t2
+        self.recalcular_altura(node_y)
+        self.recalcular_altura(node_x)
+        return node_x
 
-    def rotacionar_esquerda(self, node_inicial):
-        filho = node_inicial.filho_direito
-        subtree_t2 = filho.filho_esquerdo
+    def rotacionar_esquerda(self, node_x):
+        node_y = node_x.filho_direito
+        subtree_t2 = node_y.filho_esquerdo
         #===============================#
-        filho.filho_esquerdo = node_inicial
-        node_inicial.filho_direito = subtree_t2
-        self.recalcular_altura(node_inicial)
-        self.recalcular_altura(filho)
-        return filho
+        node_y.filho_esquerdo = node_x
+        node_x.filho_direito = subtree_t2
+        self.recalcular_altura(node_x)
+        self.recalcular_altura(node_y)
+        return node_y
 
     def inserir(self, node, valor):
         if not node:
@@ -129,3 +129,49 @@ class AVL_Router_Tree:
             return self.rotacionar_esquerda(raiz)
 
         return raiz
+
+class RedBlack_Router_Tree:
+    def __init__(self):
+        self.NIL = Node(0)
+        self.NIL.cor = "PRETO"
+        self.NIL.filho_esquerdo = None
+        self.NIL.filho_direito = None
+        self.raiz = self.NIL
+
+    def rotacionar_esquerda(self, node_x):
+        node_y = node_x.filho_direito
+        node_x.filho_direito = node_y.filho_esquerdo
+        if node_y.filho_esquerdo != self.NIL:
+            node_y.filho_esquerdo.pai = node_x
+
+        node_y.pai = node_x.pai
+
+        if node_x.pai is None:
+            self.raiz = node_y
+        elif node_x == node_x.pai.filho_esquerdo:
+            node_x.pai.filho_esquerdo = node_y
+        else:
+            node_x.pai.filho_direito = node_y
+
+        node_y.filho_esquerdo = node_x
+        node_x.pai = node_y
+
+    def rotacionar_direita(self, node_y):
+        node_x = node_y.filho_esquerdo
+        node_y.filho_esquerdo = node_x.filho_direito
+
+        if node_x.filho_direito != self.NIL:
+            node_x.filho_direito.pai = node_y
+
+        node_x.pai = node_y.pai
+
+        if node_y.pai is None:
+            self.raiz = node_x
+        elif node_y == node_y.pai.filho_direito:
+            node_y.pai.filho_direito = node_x
+        else:
+            node_y.pai.filho_esquerdo = node_x
+
+        node_x.filho_direito = node_y
+        node_y.pai = node_x
+
