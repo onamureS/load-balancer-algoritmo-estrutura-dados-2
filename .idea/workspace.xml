@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="mudança na organização dos arquivos" />
+    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="correções nas rotações em caso de remoção (AVL)">
+      <change beforePath="$PROJECT_DIR$/benchmark.py" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,15 +46,16 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.benchmark.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature",
+    "ignore.virus.scanning.warn.message": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -156,7 +159,23 @@
       <option name="project" value="LOCAL" />
       <updated>1780089171038</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="correções nos métodos de rotação da árvore AVL">
+      <option name="closed" value="true" />
+      <created>1780089569289</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1780089569289</updated>
+    </task>
+    <task id="LOCAL-00013" summary="correções nas rotações em caso de remoção (AVL)">
+      <option name="closed" value="true" />
+      <created>1780089776080</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1780089776080</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -194,6 +213,8 @@
     <MESSAGE value="adição dos métodos 'buscar_por_prioridade' em ambas as árvores e correções nós códigos de inserção" />
     <MESSAGE value="correções nos métodos 'buscar_por_prioridade' e métodos de rotação da AVL; correções nos atributos da classe 'RedBlack_Router_Tree'" />
     <MESSAGE value="mudança na organização dos arquivos" />
-    <option name="LAST_COMMIT_MESSAGE" value="mudança na organização dos arquivos" />
+    <MESSAGE value="correções nos métodos de rotação da árvore AVL" />
+    <MESSAGE value="correções nas rotações em caso de remoção (AVL)" />
+    <option name="LAST_COMMIT_MESSAGE" value="correções nas rotações em caso de remoção (AVL)" />
   </component>
 </project>

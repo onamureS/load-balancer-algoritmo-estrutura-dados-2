@@ -1,4 +1,3 @@
-
 import random
 import time
 import matplotlib.pyplot as plt
@@ -7,7 +6,7 @@ from main import *
 
 # CONFIGURAÇÃO DO TESTE
 
-VOLUMES = [1000, 5000, 10000, 50000]
+VOLUMES = [1000, 5000, 10000, 50000, 100000]
 SEED = 42
 
 random.seed(SEED)
