@@ -2,7 +2,7 @@
 import random
 import time
 import matplotlib.pyplot as plt
-from load_balancer import *
+from main import *
 
 
 # CONFIGURAÇÃO DO TESTE

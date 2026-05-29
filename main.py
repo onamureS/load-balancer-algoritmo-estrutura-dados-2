@@ -19,7 +19,7 @@ class Packet_Rule:
 
 
 class Node:
-    def __init__(self, regra, cor="VERMELHO"):
+    def __init__(self, regra:Packet_Rule, cor="VERMELHO"):
         self.regra = regra
         self.filho_esquerdo = None
         self.filho_direito = None
@@ -45,39 +45,39 @@ class AVL_Router_Tree:
             return 0
         return self.get_altura(node.filho_esquerdo) - self.get_altura(node.filho_direito)
 
-    def rotacionar_direita(self, node_y):
-        node_x = node_y.filho_esquerdo
-        subtree_t2 = node_x.filho_direito
+    def rotacionar_direita(self, y:Node):
+        x = y.filho_esquerdo
+        subtree_t2 = x.filho_direito
 
-        node_x.filho_direito = node_y
-        node_y.filho_esquerdo = subtree_t2
-        node_x.pai = node_y.pai
-        node_y.pai = node_x
-
-        if subtree_t2 is not None:
-            subtree_t2.pai = node_y
-
-        self.recalcular_altura(node_y)
-        self.recalcular_altura(node_x)
-
-        return node_x
-
-    def rotacionar_esquerda(self, node_x):
-        node_y = node_x.filho_direito
-        subtree_t2 = node_y.filho_esquerdo
-
-        node_y.filho_esquerdo = node_x
-        node_x.filho_direito = subtree_t2
-        node_y.pai = node_x.pai
-        node_x.pai = node_y
+        x.filho_direito = y
+        y.filho_esquerdo = subtree_t2
+        x.pai = y.pai
+        y.pai = x
 
         if subtree_t2 is not None:
-            subtree_t2.pai = node_x
+            subtree_t2.pai = y
 
-        self.recalcular_altura(node_x)
-        self.recalcular_altura(node_y)
+        self.recalcular_altura(y)
+        self.recalcular_altura(x)
 
-        return node_y
+        return x
+
+    def rotacionar_esquerda(self, x:Node):
+        y = x.filho_direito
+        subtree_t2 = y.filho_esquerdo
+
+        y.filho_esquerdo = x
+        x.filho_direito = subtree_t2
+        y.pai = x.pai
+        x.pai = y
+
+        if subtree_t2 is not None:
+            subtree_t2.pai = x
+
+        self.recalcular_altura(x)
+        self.recalcular_altura(y)
+
+        return y
 
     def inserir(self, node, regra):
         if not node:
