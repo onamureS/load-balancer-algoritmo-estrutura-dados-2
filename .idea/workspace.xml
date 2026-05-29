@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="correções nos métodos 'buscar_por_prioridade' e métodos de rotação da AVL; correções nos atributos da classe 'RedBlack_Router_Tree'">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmark.py" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/load balancer.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="mudança na organização dos arquivos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -152,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779950721755</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="mudança na organização dos arquivos">
+      <option name="closed" value="true" />
+      <created>1780089171038</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1780089171038</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,7 +170,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/devops-testing" />
+                        <option value="origin/feature" />
                       </list>
                     </value>
                   </entry>
@@ -189,6 +193,7 @@
     <MESSAGE value="adição da classe 'Packet_Rule' e início da refatoração das variáveis para acomodar a nova classe" />
     <MESSAGE value="adição dos métodos 'buscar_por_prioridade' em ambas as árvores e correções nós códigos de inserção" />
     <MESSAGE value="correções nos métodos 'buscar_por_prioridade' e métodos de rotação da AVL; correções nos atributos da classe 'RedBlack_Router_Tree'" />
-    <option name="LAST_COMMIT_MESSAGE" value="correções nos métodos 'buscar_por_prioridade' e métodos de rotação da AVL; correções nos atributos da classe 'RedBlack_Router_Tree'" />
+    <MESSAGE value="mudança na organização dos arquivos" />
+    <option name="LAST_COMMIT_MESSAGE" value="mudança na organização dos arquivos" />
   </component>
 </project>

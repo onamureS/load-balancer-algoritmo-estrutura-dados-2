@@ -46,8 +46,14 @@ class AVL_Router_Tree:
         return self.get_altura(node.filho_esquerdo) - self.get_altura(node.filho_direito)
 
     def rotacionar_direita(self, y:Node):
+        if y is None:
+            return y
+
         x = y.filho_esquerdo
         subtree_t2 = x.filho_direito
+
+        if x is None:
+            return y
 
         x.filho_direito = y
         y.filho_esquerdo = subtree_t2
@@ -63,8 +69,15 @@ class AVL_Router_Tree:
         return x
 
     def rotacionar_esquerda(self, x:Node):
+        if x is None:
+            return x
+
         y = x.filho_direito
         subtree_t2 = y.filho_esquerdo
+
+        if y is None:
+            return x
+
 
         y.filho_esquerdo = x
         x.filho_direito = subtree_t2
