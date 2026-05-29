@@ -162,20 +162,20 @@ class AVL_Router_Tree:
         fator_balanceamento = self.balanceamento(raiz)
 
         #Esquerda-Esquerda
-        if fator_balanceamento > 1 and self.balanceamento(raiz.filho_esquerdo) >= 0:
+        if fator_balanceamento > 1 and raiz.filho_esquerdo is not None and self.balanceamento(raiz.filho_esquerdo) >= 0:
             return self.rotacionar_direita(raiz)
 
         #Direita-Direita
-        if fator_balanceamento < -1 and self.balanceamento(raiz.filho_direito) <= 0:
+        if fator_balanceamento < -1 and raiz.filho_esquerdo is not None and self.balanceamento(raiz.filho_direito) <= 0:
             return self.rotacionar_esquerda(raiz)
 
         #Esquerda-Direita
-        if fator_balanceamento > 1 and self.balanceamento(raiz.filho_esquerdo) < 0:
+        if fator_balanceamento > 1 and raiz.filho_esquerdo is not None and self.balanceamento(raiz.filho_esquerdo) < 0:
             raiz.filho_esquerdo = self.rotacionar_esquerda(raiz.filho_esquerdo)
             return self.rotacionar_direita(raiz)
 
         #Direita-Esquerda
-        if fator_balanceamento < -1 and self.balanceamento(raiz.filho_direito) > 0:
+        if fator_balanceamento < -1 and raiz.filho_esquerdo is not None and self.balanceamento(raiz.filho_direito) > 0:
             raiz.filho_direito = self.rotacionar_direita(raiz.filho_direito)
             return self.rotacionar_esquerda(raiz)
 
