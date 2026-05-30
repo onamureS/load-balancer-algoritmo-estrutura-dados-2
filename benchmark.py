@@ -9,8 +9,6 @@ from main import *
 VOLUMES = [1000, 5000, 10000, 50000, 100000]
 SEED = 42
 
-random.seed(SEED)
-
 avl_insert_resultados = []
 rb_insert_resultados = []
 
