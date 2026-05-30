@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="correções nas rotações em caso de remoção (AVL)">
+    <list default="true" id="ad6b4777-09d4-4de9-823f-9c8aeb937113" name="Changes" comment="correção do código pra passar nos testes unitários">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmark.py" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,17 +47,17 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests in testes_unitarios.py.executor": "Run",
-    "Python.benchmark.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature",
-    "ignore.virus.scanning.warn.message": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in testes_unitarios.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.benchmark.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -185,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780090075811</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="correção do código pra passar nos testes unitários">
+      <option name="closed" value="true" />
+      <created>1780100512820</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1780100512820</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,6 +233,7 @@
     <MESSAGE value="mudança na organização dos arquivos" />
     <MESSAGE value="correções nos métodos de rotação da árvore AVL" />
     <MESSAGE value="correções nas rotações em caso de remoção (AVL)" />
-    <option name="LAST_COMMIT_MESSAGE" value="correções nas rotações em caso de remoção (AVL)" />
+    <MESSAGE value="correção do código pra passar nos testes unitários" />
+    <option name="LAST_COMMIT_MESSAGE" value="correção do código pra passar nos testes unitários" />
   </component>
 </project>
