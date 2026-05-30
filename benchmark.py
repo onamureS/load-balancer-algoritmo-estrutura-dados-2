@@ -29,12 +29,12 @@ for TOTAL_REGRAS in VOLUMES:
 
     for i in range(TOTAL_REGRAS):
 
-        prioridade = random.randint(1, 1_000_000)
+        prioridade = i
 
         regra = Packet_Rule(
             id=i,
-            ip_origem=f"192.168.0.{random.randint(1,254)}",
-            ip_destino=f"10.0.0.{random.randint(1,254)}",
+            ip_origem=f"192.168.0.{i % 254 + 1}",
+            ip_destino=f"10.0.0.{i % 254 + 1}",
             prioridade=prioridade
         )
 
