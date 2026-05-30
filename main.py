@@ -38,7 +38,13 @@ class AVL_Router_Tree:
         return node.altura
 
     def recalcular_altura(self, node):
-        node.altura = 1 + max(self.get_altura(node.filho_esquerdo), self.get_altura(node.filho_direito))
+        if node is None:
+            return
+
+        altura_esquerda = (node.filho_esquerdo.altura if node.filho_esquerdo else 0)
+        altura_direita = (node.filho_direito.altura if node.filho_direito else 0)
+
+        node.altura = 1 + max(altura_esquerda, altura_direita)
 
     def balanceamento(self, node):
         if not node:
@@ -97,12 +103,14 @@ class AVL_Router_Tree:
         if not node:
             return Node(regra)
 
-        if regra < node.regra:
+        if regra.prioridade < node.regra.prioridade:
             node.filho_esquerdo = self.inserir(node.filho_esquerdo, regra)
             node.filho_esquerdo.pai = node
-        else:
+        elif regra.prioridade > node.regra.prioridade:
             node.filho_direito = self.inserir(node.filho_direito, regra)
             node.filho_direito.pai = node
+        else:
+            return node
 
         self.recalcular_altura(node)
 
