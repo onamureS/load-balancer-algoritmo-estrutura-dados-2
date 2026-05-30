@@ -1,5 +1,7 @@
 # Metodologia
 
+O projeto foi feito em Python versão **3.13**
+
 Os testes foram executados utilizando Python com medições em nanossegundos através da função time.perf_counter_ns(). Ambas as estruturas receberam exatamente os mesmos conjuntos de dados, utilizando a seed fixa 42 para garantir uniformidade experimental.
 Os cenários de teste utilizaram volumes progressivos de 1000, 5000, 10000 e 50000 regras de roteamento. Cada estrutura foi submetida a operações de inserção, busca e remoção, simulando comportamento de tabelas de fluxo em redes SDN.
 Além disso, foi realizada remoção de 20% das regras inseridas, simulando expiração de políticas de firewall em ambiente de produção.
